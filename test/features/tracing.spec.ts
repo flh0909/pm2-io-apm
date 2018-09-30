@@ -1,5 +1,5 @@
 import 'mocha'
-import Tracing from './tracing'
+import Tracing from '../../src/features/tracing'
 import * as semver from 'semver'
 import * as assert from 'assert'
 
