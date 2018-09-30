@@ -50,7 +50,7 @@ export default class Tracing implements ProfilingType {
 
   async start () {
     debug('starting collection trace events data')
-    return await this.inspectorService.post('NodeTracing.start', {
+    return this.inspectorService.post('NodeTracing.start', {
       traceConfig: this.traceConfig
     })
   }

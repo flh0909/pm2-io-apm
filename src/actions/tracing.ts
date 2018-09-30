@@ -25,8 +25,7 @@ export default class TracingAction implements ActionsInterface {
     if (!isTracingOk) return debug('Disabling tracing as node version is less than 10.10')
 
     this.tracing = new Tracing()
-    if (this.tracing === null) return debug('tracing feature not found')
-    await this.tracing.init()
+    this.tracing.init()
     this.exposeActions()
   }
 
