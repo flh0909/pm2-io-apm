@@ -5,6 +5,7 @@ import ProfilingHeapAction from '../actions/profilingHeap'
 import ProfilingCPUAction from '../actions/profilingCpu'
 import CoverageAction from '../actions/coverage'
 import MetricConfig from '../utils/metricConfig'
+import TracingAction from '../actions/tracing'
 
 const debug = Debug('axm:actionsService')
 
@@ -23,6 +24,7 @@ export default class ActionsService {
     this.services.set('profilingCpu', new ProfilingCPUAction(actionsFeature))
     this.services.set('profilingHeap', new ProfilingHeapAction(actionsFeature))
     this.services.set('coverage', new CoverageAction(actionsFeature))
+    this.services.set('tracing', new TracingAction(actionsFeature))
   }
 
   init (config?, force?) {

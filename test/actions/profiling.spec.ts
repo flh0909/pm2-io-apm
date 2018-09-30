@@ -256,4 +256,78 @@ describe('ProfilingAction', function () {
       })
     })
   })
+
+
+  describe('Tracing', () => {
+    it('should get tracing data', (done) => {
+      if (!semver.satisfies(process.version, '>= 10.10.0')) return done()
+      const child = fork(SpecUtils.buildTestPath('fixtures/actions/tracingChild.js'))
+      let uuid
+
+      child.on('message', res => {
+
+        if (res.type === 'axm:action') {
+          expect(res.data.action_type).to.equal('internal')
+        }
+
+        if (res.type === 'axm:reply') {
+          if (res.data.action_name === 'km:cpu:tracing:start') {
+            expect(res.data.return.success).to.equal(true)
+            uuid = res.data.return.uuid
+          }
+        }
+        if (res.type === 'profilings') {
+          expect(typeof res.data.data).to.equal('string')
+
+          expect(res.data.type).to.equal('tracing')
+
+          child.kill('SIGINT')
+          done()
+        }
+
+        if (res === 'initialized') {
+          child.send('km:cpu:tracing:start')
+
+          setTimeout(function () {
+            child.send('km:cpu:tracing:stop')
+          }, 500)
+        }
+      })
+    })
+
+    it('should get tracing data with timeout', (done) => {
+      if (!semver.satisfies(process.version, '>= 10.10.0')) return done()
+      const child = fork(SpecUtils.buildTestPath('fixtures/actions/tracingChild.js'))
+      let uuid
+
+      child.on('message', res => {
+
+        if (res.type === 'axm:action') {
+          expect(res.data.action_type).to.equal('internal')
+        }
+
+        if (res.type === 'axm:reply') {
+          if (res.data.action_name === 'km:cpu:tracing:start') {
+            expect(res.data.return.success).to.equal(true)
+            uuid = res.data.return.uuid
+          }
+        }
+        if (res.type === 'profilings') {
+          expect(typeof res.data.data).to.equal('string')
+
+          expect(res.data.type).to.equal('tracing')
+
+          child.kill('SIGINT')
+          done()
+        }
+
+        if (res === 'initialized') {
+          child.send({
+            msg: 'km:cpu:tracing:start',
+            opts: { timeout: 500 }
+          })
+        }
+      })
+    })
+  })
 })

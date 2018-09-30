@@ -29,6 +29,10 @@ export class InspectorService {
     this.session.on(eventName, callback)
   }
 
+  removeListener (eventName, callback) {
+    this.session.removeListener(eventName, callback)
+  }
+
   connect () {
     if (!this.isConnected) {
       this.session.connect()
