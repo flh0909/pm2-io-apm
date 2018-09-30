@@ -13,7 +13,8 @@ export default class ActionsService {
 
   private defaultConf = {
     profilingCpu: true,
-    profilingHeap: true
+    profilingHeap: true,
+    tracing: true
   }
 
   private services: Map<string, any>

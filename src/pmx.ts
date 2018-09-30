@@ -30,6 +30,7 @@ class ActionsConfig {
   profilingCpu: boolean
   profilingHeap: boolean
   eventLoopDump: boolean
+  tracing: boolean
 }
 
 class IOConfig {
