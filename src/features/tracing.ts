@@ -120,6 +120,10 @@ export class TracingFeature implements Feature {
         'ioredis': {
           module: resolve(__dirname, '../census/plugins/ioredis'),
           config: { detailedCommands: config.tracing.detailedDatabasesCalls }
+        },
+        'vue-server-renderer': {
+          module: resolve(__dirname, '../census/plugins/vue'),
+          config: {}
         }
       },
       propagation: new B3Format(),
