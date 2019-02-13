@@ -121,8 +121,8 @@ export class TracingFeature implements Feature {
           module: resolve(__dirname, '../census/plugins/ioredis'),
           config: { detailedCommands: config.tracing.detailedDatabasesCalls }
         },
-        'vue-server-renderer': {
-          module: resolve(__dirname, '../census/plugins/vue'),
+        'nuxt': {
+          module: resolve(__dirname, '../census/plugins/nuxt'),
           config: {}
         }
       },

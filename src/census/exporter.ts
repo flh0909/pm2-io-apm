@@ -97,7 +97,7 @@ export class CustomCensusExporter implements Exporter {
       localEndpoint: { serviceName: this.config.serviceName },
       tags: span.attributes
     } as TranslatedSpan
-
+    console.log(this.translateSpan)
     return spanTranslated
   }
 
